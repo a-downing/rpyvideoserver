@@ -1,0 +1,123 @@
+<html>
+    <head>
+        <title>rpyVideoServer</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script>
+            function get_document(filename)
+            {
+                return "http://" + document.location.host + "/files/?file=" + filename;
+            }
+
+            function loadScript(url, callback)
+            {
+                // adding the script tag to the head as suggested before
+               var head = document.getElementsByTagName('head')[0];
+               var script = document.createElement('script');
+               script.type = 'text/javascript';
+               script.src = url;
+
+               // then bind the event to the callback function 
+               // there are several events for cross browser compatibility
+               script.onreadystatechange = function()
+               {
+                  if (this.readyState == 'complete' || this.readyState == 'loaded')
+                  {
+                        callback();
+                  }
+                }
+
+               script.onload = callback;
+
+               // fire the loading
+               head.appendChild(script);
+            }
+
+            function SessionStorage()
+            {
+                this.createItem = function(key, val)
+                {
+                    if(sessionStorage[key] == undefined)
+                    {
+                        sessionStorage[key] = JSON.stringify(val);
+                    }
+                };
+
+                this.setItem = function(key, val)
+                {
+                    sessionStorage[key] = JSON.stringify(val);
+                };
+
+                this.getItem = function(key)
+                {
+                    return JSON.parse(sessionStorage[key]);
+                };
+
+                this.removeItem = function(key)
+                {
+                    sessionStorage.removeItem(key);
+                };
+            }
+
+            // load all the css and scripts
+            loadScript(get_document("js/jquery-1.8.2.min.js"), function()
+            {
+                var stylesheet = get_document("css/jquery.mobile-1.1.1.min.css");
+
+                $.get(stylesheet, function(contents)
+                {
+                  $("<style type=\"text/css\">" + contents + "</style>").appendTo(document.head);
+                });
+
+                loadScript(get_document("js/jquery.mobile-1.1.1.min.js"), function()
+                {
+                    loadScript(get_document("js/rpc_utils.js"), function()
+                    {
+                        loadScript(get_document("js/rpc_interface.js"), function()
+                        {
+                          loadScript(get_document("js/json2.js"), function()
+                          {
+                              loadScript(get_document("js/main.js"), function()
+                              {
+                                 //alert("loaded!");
+                              });
+                          });
+                        });
+                    });
+                });
+            });
+        </script>
+    </head>
+
+    <body style="display: none">
+        <div data-role="page" data-theme="b" id="video_search">
+            <div data-role="header">
+                <h1>Video Search</h1>
+            </div>
+
+            <div data-role="content">   
+                <h2>Search is not case sensitive, * is wildcard</h2>
+                <input type="text" id="search_text"/><a href="javascript:void(0)" data-role="button" id="search_button">Search</a>
+                <ul id="video_list" data-role="listview" data-inset="true" data-filter="false">
+                    <!-- list items -->
+                </ul>
+            </div>
+
+        </div>
+
+        <div data-role="page" data-theme="b" id="video_player">
+            <div data-role="header">
+                <h1>Video Player</h1>
+            </div>
+
+            <div data-role="content">   
+                <a href="javascript:void(0)" data-role="button" id="stop_button">Stop</a>
+                <a href="javascript:void(0)" data-role="button" id="pause_button">Pause/Play</a>
+                <a href="javascript:void(0)" data-role="button" id="forward_button">Forward</a>
+                <a href="javascript:void(0)" data-role="button" id="backward_button">Backward</a>
+                <a href="javascript:void(0)" data-role="button" id="volume_up_button">Volume +</a>
+                <a href="javascript:void(0)" data-role="button" id="volume_down_button">Volume -</a>
+            </div>
+
+        </div>
+    </body>
+</html>

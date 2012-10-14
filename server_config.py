@@ -18,7 +18,7 @@ config = {
     ),
 
     # program and arguments to play movies
-    'video_player_cmd' : ['mplayer'],
+    'video_player_cmd' : ['omxplayer', '-o', 'hdmi', '-r', '-y'],
 
     # video player controls
     'pause' : 'p',

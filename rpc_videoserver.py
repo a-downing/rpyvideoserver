@@ -77,4 +77,19 @@ class RPCVideoServer:
     def volumeDown(self, **kwargs):
         self.videoplayer_proc.stdin.write(config['vol-'])
         return rpc_utils.rpc_return(True, None)
+
+    @rpc_utils.rpc_enable()
+    def toggleSubtitles(self, **kwargs):
+        self.videoplayer_proc.stdin.write(config['subtitles'])
+        return rpc_utils.rpc_return(True, None)
+
+    @rpc_utils.rpc_enable()
+    def nextSubtitles(self, **kwargs):
+        self.videoplayer_proc.stdin.write(config['subtitles_next'])
+        return rpc_utils.rpc_return(True, None)
+
+    @rpc_utils.rpc_enable()
+    def prevSubtitles(self, **kwargs):
+        self.videoplayer_proc.stdin.write(config['subtitles_prev'])
+        return rpc_utils.rpc_return(True, None)
         

@@ -76,4 +76,19 @@ $(document).ready(function()
     {
         RPCVideoServer.volumeDown();
     });
+
+    $(document).on("click", "#toggle_subtitles_button", function()
+    {
+        RPCVideoServer.volumeDown();
+    });
+
+    $(document).on("click", "#next_subtitles_button", function()
+    {
+        RPCVideoServer.nextSubtitles();
+    });
+
+    $(document).on("click", "#prev_subtitles_button", function()
+    {
+        RPCVideoServer.prevSubtitles();
+    });
 });

@@ -35,6 +35,21 @@ var RPCVideoServer =
         return rpc_call({"class": "RPCVideoServer", method: "volumeDown", args: []});
     },
 
+    tottleSubtitles: function()
+    {
+        return rpc_call({"class": "RPCVideoServer", method: "toggleSubtitles", args: []});
+    },
+
+    nextSubtitles: function()
+    {
+        return rpc_call({"class": "RPCVideoServer", method: "nextSubtitles", args: []});
+    },
+
+    prevSubtitles: function()
+    {
+        return rpc_call({"class": "RPCVideoServer", method: "prevSubtitles", args: []});
+    },
+
     startVideo: function(filename)
     {
         return rpc_call({"class": "RPCVideoServer", method: "startVideo", args: [filename]});

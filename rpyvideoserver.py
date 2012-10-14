@@ -101,6 +101,7 @@ class VideoServer:
 
 def main(argc, argv):
     server_config = {
+        'engine.autoreload.on': False,
         'server.socket_host': config['http_ip'],
         'server.socket_port': config['http_port'],
     }
